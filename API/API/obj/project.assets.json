@@ -7547,11 +7547,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\C#\\API\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\Aziz Oktavira\\Documents\\GitHub\\Produce-API-\\API\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\C#\\API\\API\\API.csproj",
+      "projectPath": "C:\\Users\\Aziz Oktavira\\Documents\\GitHub\\Produce-API-\\API\\API\\API.csproj",
       "packagesPath": "C:\\Users\\Aziz Oktavira\\.nuget\\packages\\",
-      "outputPath": "C:\\C#\\API\\API\\obj\\",
+      "outputPath": "C:\\Users\\Aziz Oktavira\\Documents\\GitHub\\Produce-API-\\API\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Aziz Oktavira\\AppData\\Roaming\\NuGet\\NuGet.Config",

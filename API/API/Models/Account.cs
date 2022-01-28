@@ -16,6 +16,12 @@ public class Account
         [Key]
         public string NIK { get; set; }
         public string Password { get; set; }
+
+        public int otp { get; set; }
+        public DateTime ExpiredTime { get; set; }
+        public bool IsTrue { get; set; }
+
+
         [JsonIgnore]
         public virtual Employee Employee { get; set; }
         [JsonIgnore]

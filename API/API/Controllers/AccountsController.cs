@@ -47,6 +47,23 @@ namespace API.Controllers
                 return StatusCode(400, new { status = HttpStatusCode.BadRequest, result, message = "Gagal Login" });
             }
         }
+
+        [Route("ForgetPass")]
+        [HttpPost]
+        public ActionResult<RegisterVM> ForgotPass (RegisterVM registerVM)
+        {
+            var hasil = accountRepository.ForgotPass(registerVM.Email);
+            if(hasil == 1)
+            {
+                return StatusCode(200, new { status = HttpStatusCode.OK ,message = "OTP Terkirim" });
+            }
+            else
+            {
+                return  StatusCode(404, new { status = HttpStatusCode.NotFound, message = "Email Tidak Terdaftar" });
+            }
+
+
+        }
     }
 
 }
