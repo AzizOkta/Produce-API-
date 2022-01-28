@@ -61,8 +61,38 @@ namespace API.Controllers
             {
                 return  StatusCode(404, new { status = HttpStatusCode.NotFound, message = "Email Tidak Terdaftar" });
             }
+        }
 
+        [Route("ChangePassword")]
+        [HttpPut]
 
+        public ActionResult<changepassword>ChangePass(changepassword ChangePass)
+        {
+            var result = accountRepository.ChangePass(ChangePass);
+            if(result == 1)
+            {
+                return StatusCode(200, new { status = HttpStatusCode.OK, message = "Password Berhasil di Ubah" });
+            }
+            else if (result == 2)
+            {
+                return StatusCode(400, new { status = HttpStatusCode.BadRequest, message = "Pass dan Confirm Tidak Sama" });
+            }
+            else if (result == 3)
+            {
+                return StatusCode(400, new { status = HttpStatusCode.BadRequest, message = "OTP Sudah Digunakan" });
+            }
+            else if (result == 4)
+            {
+                return StatusCode(400, new { status = HttpStatusCode.BadRequest, message = "Kode OTP Salah" });
+            }
+            else if (result == 5)
+            {
+                return StatusCode(400, new { status = HttpStatusCode.BadRequest, message = "Kode OTP Expired" });
+            }
+            else 
+            {
+                return StatusCode(404, new { status = HttpStatusCode.NotFound, message = "Email Tidak Terdaftar" });
+            }
         }
     }
 

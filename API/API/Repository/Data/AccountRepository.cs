@@ -47,7 +47,6 @@ namespace API.Repository.Data
             mail.From = new MailAddress("tesotpauthentication@gmail.com", "OTP", System.Text.Encoding.UTF8);
             mail.SubjectEncoding = System.Text.Encoding.UTF8;
             mail.Body = "OTP Code =" + otp;
-            mail.Body = DateTime.Now.ToString();
             mail.BodyEncoding = System.Text.Encoding.UTF8;
             mail.IsBodyHtml = true;
             mail.Priority = MailPriority.High;
@@ -95,6 +94,50 @@ namespace API.Repository.Data
             }
             
                 return 0;                   
+        }
+
+        public int ChangePass(changepassword  ChangePass)
+
+        {
+            var cekemail = Context.Employees.Where(e => e.Email == ChangePass.email).FirstOrDefault();
+           
+            if( cekemail != null)
+            {
+                var acc = Context.Accounts.Where(e => e.NIK == cekemail.NIK).FirstOrDefault();
+                if (DateTime.Now < acc.ExpiredTime)
+                {
+                    if (acc.otp == ChangePass.OTP) // cek otp
+                    {
+                        if (acc.IsTrue == false) // cek otp apkah sudah digunakan /belum
+                        {
+                            if (ChangePass.pass == ChangePass.confirmPass)
+                            {
+                                acc.Password = BCrypt.Net.BCrypt.HashPassword(ChangePass.confirmPass);
+                                acc.IsTrue = true;
+                                Context.Entry(acc).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                                Context.SaveChanges();
+                                return 1; // behasil di ganti
+                            }
+                            else
+                            {
+                                return 2; // Pass dan confirm tidak sama
+                            }
+                        }
+                        else
+                        {
+                            return 3; // otp Sudah digunakan
+                        }
+                    }
+                    return 4; // OTP Salah
+                }
+                else
+                {
+                    return 5;//OTP Expired
+
+                }
+               
+            }
+            return 0; // NotFound
         }
 
 

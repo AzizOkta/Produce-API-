@@ -35,6 +35,8 @@ namespace API
             services.AddScoped<Repository.Data.AccountRepository>();
             services.AddScoped<Repository.Data.EducationRepository>();
             services.AddScoped<Repository.Data.ProfilingRepository>();
+            services.AddScoped<Repository.Data.RoleRepository>();
+           
 
 
             services.AddDbContext<MyContext>(options =>

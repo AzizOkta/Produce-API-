@@ -51,7 +51,6 @@ namespace API.Repository.Data
                     Context.SaveChanges();
 
                     Education ed = new Education();
-
                     ed.Degree = registerVM.Degree;
                     ed.GPA = registerVM.GPA;
                     ed.University_Id = registerVM.University_Id;
@@ -62,6 +61,12 @@ namespace API.Repository.Data
                     pro.NIK = acc.NIK;
                     pro.Education_Id = ed.id;
                     Context.Profilings.Add(pro);
+                    Context.SaveChanges();
+
+                    AccountRole AR = new AccountRole();
+                    AR.Id_Account = emp.NIK;
+                    AR.Id_Role = 1;
+                    Context.AccountRoles.Add(AR);
                     Context.SaveChanges();
 
                     return 1;
@@ -87,15 +92,18 @@ namespace API.Repository.Data
 
         public IEnumerable GetRegisteredData()
         {
-
             var employees = Context.Employees;
             var accounts = Context.Accounts;
             var profilings = Context.Profilings;
             var educations = Context.Educations;
             var universities = Context.Universities;
+            var accountrole = Context.AccountRoles;
+            var role = Context.Roles;
 
             var result = (from emp in employees
                           join acc in accounts on emp.NIK equals acc.NIK
+                          join ar in accountrole on acc.NIK equals ar.Id_Account
+                          join r in role on ar.Id_Role equals r.id
                           join pro in profilings on acc.NIK equals pro.NIK
                           join edu in educations on pro.Education_Id equals edu.id
                           join univ in universities on edu.University_Id equals univ.id
@@ -109,7 +117,8 @@ namespace API.Repository.Data
                               Email = emp.Email,
                               Degree = edu.Degree,
                               GPA = edu.GPA,
-                              UnivName = univ.Name
+                              UnivName = univ.Name,
+                              RoleName = r.nama
                           }).ToList();
 
             return result;
