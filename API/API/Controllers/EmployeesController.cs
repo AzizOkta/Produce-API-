@@ -3,6 +3,7 @@ using API.Models;
 using API.Models.ViewModel;
 using API.Repository;
 using API.Repository.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -54,6 +55,7 @@ namespace API.Controllers
             }
         }
 
+       [Authorize(Roles = "Director, Manager")]
         [Route("registerdata")]
         [HttpGet]
 
@@ -68,6 +70,7 @@ namespace API.Controllers
             {
                 return StatusCode(404, new { status = HttpStatusCode.NotFound, result, message = "Data Tidak Ditemukan" });  //ini kalau datanya harus kosong
             }
+
         }
     }
 }

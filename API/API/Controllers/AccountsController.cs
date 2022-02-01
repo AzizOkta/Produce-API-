@@ -1,13 +1,20 @@
 ﻿using API.Base;
+using API.Context;
 using API.Models;
 using API.Models.ViewModel;
 using API.Repository.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -17,9 +24,21 @@ namespace API.Controllers
     public class AccountsController : BaseController<Account, AccountRepository, string> 
     {
         private readonly AccountRepository accountRepository;
-        public AccountsController(AccountRepository accountRepository) : base(accountRepository)
+        public IConfiguration _configuration;
+        private readonly MyContext Context;
+
+        public AccountsController(MyContext myContext, AccountRepository accountRepository, IConfiguration configuration) : base(accountRepository)
         {
             this.accountRepository = accountRepository;
+            this._configuration = configuration;
+            this.Context = myContext;
+        }
+
+        [Authorize]
+        [HttpGet("TestJWT")]
+        public ActionResult TestJWT()
+        {
+            return Ok("Test JWT Berhasil");
         }
 
         [Route("login")]
@@ -39,7 +58,32 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return StatusCode(200, new { status = HttpStatusCode.OK, result, message = "Berhasil Login" });
+                    var getUserData = Context.Employees.Where(e => e.Email == loginVM.Email || e.Phone == loginVM.Email).FirstOrDefault();
+                    var getRole = Context.Roles.Where(r => r.AccountRole.Any(ar => ar.Account.NIK == getUserData.NIK)).ToList();
+
+                    var claims = new List<Claim>
+                    {
+                        new Claim("Email", loginVM.Email) //payload
+                    };
+
+                    foreach (var item in getRole)
+                    {
+                        claims.Add(new Claim("roles", item.nama));
+                    }
+
+                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+                    var signin = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                    var token = new JwtSecurityToken
+                    (
+                        _configuration["Jwt:Issuer"],
+                        _configuration["Jwt:Audience"],
+                        claims,
+                        expires: DateTime.UtcNow.AddMinutes(10),
+                        signingCredentials: signin
+                    );
+                    var idtoken = new JwtSecurityTokenHandler().WriteToken(token);
+                    claims.Add(new Claim("TokenSecurity", idtoken.ToString()));
+                    return StatusCode(200, new { status = HttpStatusCode.OK, idtoken, message = "Berhasil Login" });
                 }
             }
             else

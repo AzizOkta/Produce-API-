@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "DvuzrIK91aolytv0T2QsXNNgxJp9l9EQZuktb4bO3t8DD9fZpHNQkrniL9j0qOHOWiw88/FEVae6y8tlRKaO/Q==",
+  "dgSpecHash": "AdBKlPHg/TIILW7GT6g/3SAfq40qSXgyrvj0uUiaEkqIzYVHKXazuQBE5rpPLLbhzLLXAzmkD5SMEgLfl6oI3w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Aziz Oktavira\\Documents\\GitHub\\Produce-API-\\API\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aziz Oktavira\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\Aziz Oktavira\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\Aziz Oktavira\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Aziz Oktavira\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.8\\microsoft.aspnetcore.authentication.jwtbearer.3.1.8.nupkg.sha512",
     "C:\\Users\\Aziz Oktavira\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.0.0\\microsoft.aspnetcore.jsonpatch.3.0.0.nupkg.sha512",
     "C:\\Users\\Aziz Oktavira\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.0.0\\microsoft.aspnetcore.mvc.newtonsoftjson.3.0.0.nupkg.sha512",
     "C:\\Users\\Aziz Oktavira\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

@@ -138,3 +138,4 @@ C:\Users\Aziz Oktavira\Documents\GitHub\Produce-API-\API\API\obj\Debug\netcoreap
 C:\Users\Aziz Oktavira\Documents\GitHub\Produce-API-\API\API\obj\Debug\netcoreapp3.1\API.dll
 C:\Users\Aziz Oktavira\Documents\GitHub\Produce-API-\API\API\obj\Debug\netcoreapp3.1\API.pdb
 C:\Users\Aziz Oktavira\Documents\GitHub\Produce-API-\API\API\obj\Debug\netcoreapp3.1\API.genruntimeconfig.cache
+C:\Users\Aziz Oktavira\Documents\GitHub\Produce-API-\API\API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
