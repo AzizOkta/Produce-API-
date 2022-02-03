@@ -26,6 +26,11 @@ namespace API.Controllers
             this.employeeRepository = employeeRepository;
         }
 
+        [HttpGet("TestCORS")]
+        public ActionResult TestCORS()
+        {
+            return Ok("Test Cors Berhasil");
+        }
         [HttpPost("{Register}")]
         public ActionResult<RegisterVM> Post(RegisterVM registerVM)
         {
